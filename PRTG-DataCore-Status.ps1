@@ -33,7 +33,7 @@ param(
 trap{
     if($con)
         {
-        $null = Disconnect-DcsServer -Connection $con -Confirm:$false -ErrorAction SilentlyContinue
+        $null = Disconnect-DcsServer -Connection $con -ErrorAction SilentlyContinue
         }
     $Output = "line:$($_.InvocationInfo.ScriptLineNumber.ToString()) char:$($_.InvocationInfo.OffsetInLine.ToString()) --- message: $($_.Exception.Message.ToString()) --- line: $($_.InvocationInfo.Line.ToString()) "
     $Output = $Output.Replace("<","")
@@ -188,7 +188,13 @@ foreach ($DC in $DCs)
 
     #System Memory %
     #Total/Available
-    $UsedMem = [math]::Round(($DC.AvailableSystemMemory.Value / $DC.TotalSystemMemory.Value *100),0)
+    try{
+        $UsedMem = [math]::Round(($DC.AvailableSystemMemory.Value / $DC.TotalSystemMemory.Value *100),0)
+        }
+    catch
+        {
+        $UsedMem = 0
+        }
     $xmlOutput = $xmlOutput + "<result>
         <channel>$($DC.Caption) MemoryUsed</channel>
         <value>$UsedMem</value>
