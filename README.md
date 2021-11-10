@@ -30,7 +30,7 @@ This Script can monitor DataCore.
 
    | Settings | Value |
    | --- | --- |
-   | EXE/Script | PRTG-DataCore-XXX.ps1 |
+   | EXE/Script Advanced | PRTG-DataCore-XXX.ps1 |
    | Parameters | -DcsServer 'YourDataCoreServer'|
    | Scanning Interval | 15 minutes |
 
