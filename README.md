@@ -1,15 +1,16 @@
-# PRTG-DataCore
-# About
+# PRTG-DataCore.PS1
 
-## Project Owner:
+<!-- ABOUT THE PROJECT -->
+### About The Project
+Project Owner: Jannos-443
 
-Jannos-443
+PRTG Powershell Script to monitor Datacore Status
 
-## Project Details
+Free and open source: [MIT License](https://github.com/Jannos-443/PRTG-DataCore/blob/main/LICENSE)
 
-This Script can monitor DataCore.
 
-## HOW TO
+<!-- GETTING STARTED -->
+## Getting Started
 1. Log into DataCore Server
    
    - add new local computer user (for example: prtg-datacore)
@@ -30,34 +31,52 @@ This Script can monitor DataCore.
 
    | Settings | Value |
    | --- | --- |
-   | EXE/Script Advanced | PRTG-DataCore-XXX.ps1 |
+   | EXE/Script Advanced | PRTG-DataCore.ps1 |
    | Parameters | -DcsServer 'YourDataCoreServer'|
    | Scanning Interval | 15 minutes |
 
 
-## Examples
-### Example Call: 
+## Authentication
 
-    Windows Auth (Better): PRTG-DataCore-Alerts.ps1 -DcsServer 'YourDataCoreServer' (Windows Auth)
-    Username and Password: PRTG-DataCore-Alerts.ps1 -DcsServer 'YourDataCoreServer' -User 'YourUsername' -Password 'YourPassword' 
+    Windows Auth (Better): PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' (Windows Auth)
+    Username and Password: PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -User 'YourUsername' -Password 'YourPassword' 
     
 You should try to use Windows Auth (Use Windows credentials of parent device)
 
 if required use the -User and -Password parameter.
 
-### Example Screenshots: 
+## Usage
 
-PRTG-DataCore-Status
+Datacore Status
+```powershell
+PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -DcsStatus
+```
 ![PRTG-DataCore-Status](media/Status.png)
 
-PRTG-DataCore-Alerts
+
+Datacore Alerts
+```powershell
+PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -DcsAlerts
+```
 ![PRTG-DataCore-Alerts](media/Alerts.png)
 
-PRTG-DataCore-Pools
+
+Datacore Pools
+```powershell
+PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -DcsPools
+```
 ![PRTG-DataCore-Pools](media/Pools.png)
 
-PRTG-DataCore-Ports
+
+Datacore Ports
+```powershell
+PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -DcsPorts
+```
 ![PRTG-DataCore-Ports](media/Ports.png)
 
-PRTG-DataCore-VirtualDisks
+
+Datacore VirtualDisks
+```powershell
+PRTG-DataCore.ps1 -DcsServer 'YourDataCoreServer' -DcsVirtualDisks
+```
 ![PRTG-DataCore-VirtualDisks](media/VirtualDisks.png)
