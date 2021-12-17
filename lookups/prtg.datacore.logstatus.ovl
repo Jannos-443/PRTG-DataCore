@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ValueLookup id="prtg.datacore.logstatus" desiredValue="0" undefinedState="Error">
+    <Lookups>
+      <SingleInt state="Error" value="-1">Unknown</SingleInt>
+      <SingleInt state="Ok" value="1">Operational</SingleInt>
+      <SingleInt state="Warning" value="2">StoragePaused</SingleInt>
+      <SingleInt state="Error" value="3">StorageFailed</SingleInt>
+	  <SingleInt state="Error" value="4">QueueFull</SingleInt>
+	  <SingleInt state="Error" value="5">Flooded</SingleInt>
+    </Lookups>
+  </ValueLookup>

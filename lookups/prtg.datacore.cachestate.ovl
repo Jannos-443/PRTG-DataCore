@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ValueLookup id="prtg.datacore.cachestate" desiredValue="0" undefinedState="Error">
+    <Lookups>
+      <SingleInt state="Error" value="-1">Unknown</SingleInt>
+      <SingleInt state="Error" value="1">Unknown</SingleInt>
+      <SingleInt state="Ok" value="2">WritethruGlobal</SingleInt>
+      <SingleInt state="Ok" value="3">WritebackGlobal</SingleInt>
+    </Lookups>
+  </ValueLookup>

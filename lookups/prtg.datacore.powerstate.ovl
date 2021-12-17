@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ValueLookup id="prtg.datacore.powerstate" desiredValue="0" undefinedState="Error">
+    <Lookups>
+      <SingleInt state="Error" value="-1">Unknown</SingleInt>
+	  <SingleInt state="Error" value="1">Unknown</SingleInt>
+      <SingleInt state="Error" value="2">ACOffline</SingleInt>
+      <SingleInt state="OK" value="3">ACOnline</SingleInt>
+      <SingleInt state="Warning" value="4">BatteryLow</SingleInt>
+    </Lookups>
+  </ValueLookup>

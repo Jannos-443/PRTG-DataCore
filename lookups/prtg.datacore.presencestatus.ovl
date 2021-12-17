@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ValueLookup id="prtg.datacore.presencestatus" desiredValue="0" undefinedState="Error">
+    <Lookups>
+      <SingleInt state="Error" value="-1">Unknown</SingleInt>
+      <SingleInt state="Error" value="1">Unknown</SingleInt>
+      <SingleInt state="OK" value="2">Present</SingleInt>
+      <SingleInt state="Error" value="3">NotPresent</SingleInt>
+    </Lookups>
+  </ValueLookup>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ValueLookup id="prtg.datacore.poolstatus" desiredValue="0" undefinedState="Error">
+    <Lookups>
+      <SingleInt state="Error" value="-1">Unknown</SingleInt>
+      <SingleInt state="OK" value="1">Running</SingleInt>
+      <SingleInt state="Warning" value="2">Initializing</SingleInt>
+      <SingleInt state="Error" value="3">MissingDisks</SingleInt>
+	  <SingleInt state="Error" value="4">Foreign</SingleInt>
+	  <SingleInt state="Error" value="5">Offline</SingleInt>
+	  <SingleInt state="Error" value="6">Unknown</SingleInt>
+    </Lookups>
+  </ValueLookup>

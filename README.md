@@ -27,7 +27,15 @@ Free and open source: [MIT License](https://github.com/Jannos-443/PRTG-DataCore/
 
 4. Place the Scripts under `C:\Program Files (x86)\PRTG Network Monitor\Custom Sensors\EXEXML`
 
-5. Create new Sensor
+5. Place the lookup Files under `C:\Program Files (x86)\PRTG Network Monitor\lookups\custom`
+   - `prtg.datacore.presencestatus.ovl`
+   - `prtg.datacore.poolstatus.ovl`
+   - `prtg.datacore.state.ovl`
+   - `prtg.datacore.cachestate.ovl`
+   - `prtg.datacore.powerstate.ovl`
+   - `prtg.datacore.logstatus.ovl`
+
+6. Create new Sensor
 
    | Settings | Value |
    | --- | --- |
