@@ -35,7 +35,10 @@ Free and open source: [MIT License](https://github.com/Jannos-443/PRTG-DataCore/
    - `prtg.datacore.powerstate.ovl`
    - `prtg.datacore.logstatus.ovl`
 
-6. Create new Sensor
+6. Run PRTG Lookup File Reload
+   - PRTG > Setup > System Administration > Load Lookups and File Lists 
+
+7. Create new Sensor
 
    | Settings | Value |
    | --- | --- |
