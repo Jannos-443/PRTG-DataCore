@@ -183,16 +183,16 @@ if($DcsAlerts)
         if($alert.Level -eq "Warning")
             {
             $WarningCount += 1
-            $WarningText += "$($alert.MessageText) ###"
+            $WarningText += "$($alert.MessageText) - "
             }
         elseif($alert.Level -eq "Error")
             {
             $ErrorCount += 1
-            $ErrorText += "$($alert.MessageText) ###"
+            $ErrorText += "$($alert.MessageText) - "
             }
         }
 
-    $xmlOutput = $xmlOutput + "<result>
+    $xmlOutput += "<result>
             <channel>Error Count</channel>
             <value>$($ErrorCount)</value>
             <unit>Count</unit>
@@ -226,14 +226,16 @@ if($DcsAlerts)
         $OutputText = $OutputText.Replace("<","")
         $OutputText = $OutputText.Replace(">","")
         $OutputText = $OutputText.Replace("#","")
+        $OutputText = $OutputText.Replace("[","")
+        $OutputText = $OutputText.Replace("]","")
         #The number sign (#) is not supported in sensor messages. If a message contains a number sign, the message is clipped at this point - https://www.paessler.com/manuals/prtg/custom_sensors
         
-        $xmlOutput = $xmlOutput + "<text>$($OutputText)</text>"
+        $xmlOutput += "<text>$($OutputText)</text>"
         }
 
     else
         {
-        $xmlOutput = $xmlOutput + "<text>No Alerts found</text>"
+        $xmlOutput += "<text>No Alerts found</text>"
         }
     }
 # End Region Datacore Alerts
@@ -248,7 +250,7 @@ if($DcsStatus)
     #Online Server
     $DCsOnline = ($DCs | Where-Object {$_.State -eq "Online"}).count
 
-    $xmlOutput = $xmlOutput + "<result>
+    $xmlOutput += "<result>
             <channel>Server Online</channel>
             <value>$($DCsOnline)</value>
             <unit>Count</unit>
@@ -273,7 +275,7 @@ if($DcsStatus)
             'Failed' { $dcstate = 4}
             default { $dcstate = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($DC.Caption) State</channel>
             <value>$($dcstate)</value>
             <ValueLookup>prtg.datacore.state</ValueLookup>
@@ -289,7 +291,7 @@ if($DcsStatus)
             'Flooded' { $dclogstatus = 5}
             default { $dclogstatus = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($DC.Caption) LogStatus</channel>
             <value>$($dclogstatus)</value>
             <ValueLookup>prtg.datacore.logstatus</ValueLookup>
@@ -304,7 +306,7 @@ if($DcsStatus)
             'BatteryLow' { $dcpowerstate = 4}
             default { $dcpowerstate = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($DC.Caption) PowerState</channel>
             <value>$($dcpowerstate)</value>
             <ValueLookup>prtg.datacore.powerstate</ValueLookup>
@@ -318,7 +320,7 @@ if($DcsStatus)
             'WritebackGlobal' { $dccachestate = 3}
             default { $dccachestate = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($DC.Caption) CacheState</channel>
             <value>$($dccachestate)</value>
             <ValueLookup>prtg.datacore.cachestate</ValueLookup>
@@ -333,7 +335,7 @@ if($DcsStatus)
             {
             $UsedMem = 0
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($DC.Caption) MemoryUsed</channel>
             <value>$($UsedMem)</value>
             <unit>Percent</unit>
@@ -345,7 +347,7 @@ if($DcsStatus)
 
     #Storage Used (Byte?)
     $StorageUsed = $DCs.StorageUsed | Select-Object -First 1 -ExpandProperty Value
-    $xmlOutput = $xmlOutput + "<result>
+    $xmlOutput += "<result>
             <channel>Storage Used</channel>
             <value>$($StorageUsed)</value>
             <unit>BytesDisk</unit>
@@ -353,11 +355,11 @@ if($DcsStatus)
 
     if($DCsOnline -ge 1)
         {
-        $xmlOutput = $xmlOutput + "<text>$($NodeOnlineTXT)</text>"
+        $xmlOutput += "<text>$($NodeOnlineTXT)</text>"
         }
     else
         {
-        $xmlOutput = $xmlOutput + "<text>No Online Nodes!</text>"
+        $xmlOutput += "<text>No Online Nodes!</text>"
         }
     }
 # End Region Datacore Status
@@ -421,11 +423,11 @@ if($DcsVirtualDisks)
 
     if($OutputText -ne "")
         {
-        $xmlOutput = $xmlOutput + "<text>$($OutputText)</text>"
+        $xmlOutput += "<text>$($OutputText)</text>"
         }
 
     #Graphs
-    $xmlOutput = $xmlOutput + "<result>
+    $xmlOutput += "<result>
             <channel>VDisks Online</channel>
             <value>$($DiskOnline.Count)</value>
             <unit>Count</unit>
@@ -475,7 +477,7 @@ if($DcsPools)
             'Unknown' { $dcPoolStatus = 6}
             default { $dcPoolStatus = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($Pool.Caption) PoolStatus</channel>
             <value>$($dcPoolStatus)</value>
             <ValueLookup>prtg.datacore.poolstatus</ValueLookup>
@@ -489,7 +491,7 @@ if($DcsPools)
             'NotPresent' { $dcPresenceStatus = 3}
             default { $dcPresenceStatus = -1 }
             }
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($Pool.Caption) PresenceStatus</channel>
             <value>$($dcPresenceStatus)</value>
             <ValueLookup>prtg.datacore.presencestatus</ValueLookup>
@@ -497,7 +499,7 @@ if($DcsPools)
 
         $perf = Get-DcsPerformanceCounter -Object $Pool -Connection $con
         $SpaceFree = [math]::Round($perf.PercentAvailable,0)
-        $xmlOutput = $xmlOutput + "<result>
+        $xmlOutput += "<result>
             <channel>$($Pool.Caption) SpaceFree</channel>
             <value>$($SpaceFree)</value>
             <unit>Percent</unit>
@@ -537,7 +539,7 @@ if($DcsPorts)
             }    
         }
 
-    $xmlOutput = $xmlOutput + "<result>
+    $xmlOutput += "<result>
             <channel>Ports not Connected</channel>
             <value>$($NotConnectedCount)</value>
             <unit>Count</unit>
@@ -572,12 +574,12 @@ if($DcsPorts)
         $OutputText = $OutputText.Replace("#","")
         #The number sign (#) is not supported in sensor messages. If a message contains a number sign, the message is clipped at this point - https://www.paessler.com/manuals/prtg/custom_sensors
         
-        $xmlOutput = $xmlOutput + "<text>$($OutputText)</text>"
+        $xmlOutput += "<text>$($OutputText)</text>"
         }
 
     else
         {
-        $xmlOutput = $xmlOutput + "<text>All Ports Connected</text>"
+        $xmlOutput += "<text>All Ports Connected</text>"
         }
     }
 # End Region Datacore Ports
@@ -585,6 +587,6 @@ if($DcsPorts)
 # Disconnect DataCore
 Disconnect-DcsServer -Connection $con
 
-$xmlOutput = $xmlOutput + "</prtg>"
+$xmlOutput += "</prtg>"
 
 Write-Output $xmlOutput
