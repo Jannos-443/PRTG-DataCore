@@ -228,7 +228,8 @@ if($DcsAlerts)
         $OutputText = $OutputText.Replace("#","")
         $OutputText = $OutputText.Replace("[","")
         $OutputText = $OutputText.Replace("]","")
-        $OutputText = $OutputText -replace '[^\p{L}\p{Nd}/(/}/_]', ''
+        $OutputText = $OutputText -replace '([^\p{L}\p{Nd}/(/}/_])(?!\s|$)', ' '
+        $OutputText = $OutputText.Substring(0, [Math]::Min($OutputText.Length, 1900))
         #The number sign (#) is not supported in sensor messages. If a message contains a number sign, the message is clipped at this point - https://www.paessler.com/manuals/prtg/custom_sensors
         
         $xmlOutput += "<text>$($OutputText)</text>"
